@@ -1,103 +1,6 @@
-define(['jquery', 'jQueryKit'],  function ($) {
-
-/* ----- RGB 颜色 ----- */
-
-    function Color(min) {
-
-        min = min || 0;
-
-        var _Self_ = this.constructor;
-
-        this.red = _Self_.random( min );
-        this.green = _Self_.random( min );
-        this.blue = _Self_.random( min );
-
-        this.style = _Self_.getStyle(this.red, this.green, this.blue);
-    }
-
-    $.extend(Color, {
-        random:      function (min) {
-
-            return  Math.random() * 255 + min;
-        },
-        getStyle:    function (red, green, blue) {
-
-            return  'rgba(' + [
-                Math.floor(red), Math.floor(green), Math.floor(blue), 0.8
-            ].join(', ') + ')';
-        }
-    });
-
-/* ----- 恒星点 ----- */
-
-    function Star(Max_X, Max_Y, iContext) {
-
-        this.x = Math.random() * Max_X;
-        this.y = Math.random() * Max_Y;
-
-        this.vx = Math.random() - 0.5;
-        this.vy = Math.random() - 0.5;
-
-        this.radius = Math.random();
-
-        this.color = new Color();
-
-        this.context = iContext;
-    }
-
-    Star.mixValue = function (comp1, weight1, comp2, weight2) {
-
-        return  (comp1 * weight1 + comp2 * weight2) / (weight1 + weight2);
-    };
-
-    $.extend(Star.prototype, {
-        draw:        function () {
-
-            this.context.beginPath();
-
-            this.context.fillStyle = this.color.style;
-
-            this.context.arc(
-                this.x,  this.y,  this.radius,  0,  Math.PI * 2,  false
-            );
-            this.context.fill();
-        },
-        mixColor:    function (iOther) {
-
-            return Color.getStyle(
-                Star.mixValue(
-                    this.color.red, this.radius, iOther.color.red, iOther.radius
-                ),
-                Star.mixValue(
-                    this.color.green, this.radius, iOther.color.red, iOther.radius
-                ),
-                Star.mixValue(
-                    this.color.blue, this.radius, iOther.color.red, iOther.radius
-                )
-            );
-        }
-    });
-
-/* ----- 星空图 ----- */
-
-    function CanvasView($_View) {
-
-        this.$_View = $( $_View );
-
-        this.init();
-
-        $( self ).on('resize',  $.throttle(this.init.bind( this )));
-
-        return this;
-    }
-
-    CanvasView.prototype.init = function () {
-
-        var $_View = this.$_View.offsetParent();
-
-        this.width = this.$_View[0].width = $_View.width();
-        this.height = this.$_View[0].height = $_View.height();
-    };
+define([
+    'jquery', './Color', './Star', './CanvasView', 'jQueryKit'
+],  function ($, Color, Star, CanvasView) {
 
     function StarMap($_View, iMax, iDistance, iRadius) {
 
@@ -183,7 +86,7 @@ define(['jquery', 'jQueryKit'],  function ($) {
 
             self.requestAnimationFrame( arguments.callee.bind(this) );
         },
-        render:         function () {
+        render:     function () {
 
             for (var i = 0;  i < this.max;  i++)
                 this[ this.length++ ] = new Star(

@@ -1,0 +1,35 @@
+{
+  "name": "star-map",
+  "version": "0.2.0",
+  "description": "Particle / Star Map interactive animation",
+  "main": "StarMap.js",
+  "engines": {
+    "node": "^5.0.0"
+  },
+  "scripts": {
+    "bundle": "cd source  &&  amd-bundle ../StarMap.js",
+    "compress": "uglifyjs StarMap.js -o build/StarMap.min.js --config-file build/compress.json",
+    "build": "npm run bundle  &&  npm run compress",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TechQuery/StarMap.git"
+  },
+  "keywords": [
+    "particle",
+    "animation",
+    "javascript",
+    "canvas"
+  ],
+  "author": "shiy007@qq.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TechQuery/StarMap/issues"
+  },
+  "homepage": "https://github.com/TechQuery/StarMap#readme",
+  "devDependencies": {
+    "amd-bundle": "^0.4.2",
+    "uglify-js": "^3.0.24"
+  }
+}
