@@ -19,13 +19,16 @@ git clone https://github.com/TechQuery/StarMap.git
 
 npm install
 
-npm test
-
 npm run build
+
+npm test
 ```
 
 
 ## 【同类项目】
 
  - http://git.hust.cc/canvas-nest.js/
+
+ - https://github.com/hilongjw/Qarticles
+
  - http://vincentgarreau.com/particles.js/

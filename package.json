@@ -10,7 +10,7 @@
     "bundle": "cd source  &&  amd-bundle ../StarMap.js",
     "compress": "uglifyjs StarMap.js -o build/StarMap.min.js --config-file build/compress.json",
     "build": "npm run bundle  &&  npm run compress",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "opn index.html"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
   "homepage": "https://github.com/TechQuery/StarMap#readme",
   "devDependencies": {
     "amd-bundle": "^0.4.2",
+    "opn-cli": "^3.1.0",
     "uglify-js": "^3.0.24"
   }
 }
