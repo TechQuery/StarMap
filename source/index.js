@@ -1,5 +1,5 @@
 define([
-    'jquery', './Color', './Star', './CanvasView', 'jQueryKit'
+    'jquery', './Color', './Star', './CanvasView'
 ],  function ($, Color, Star, CanvasView) {
 
     function StarMap($_View, iMax, iDistance, iRadius) {
@@ -33,7 +33,7 @@ define([
         });
     }
 
-    return  $.inherit(CanvasView, StarMap, null, {
+    CanvasView.extend(StarMap, null, {
         move:       function () {
             var _This_ = this;
 
@@ -96,4 +96,7 @@ define([
             self.requestAnimationFrame( this.animate.bind(this) );
         }
     });
+
+    return StarMap;
+
 });

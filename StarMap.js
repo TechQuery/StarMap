@@ -30,7 +30,7 @@ var Color = (function ($) {
         this.style = _Self_.getStyle(this.red, this.green, this.blue);
     }
 
-    return  $.extend(Color, {
+    $.extend(Color, {
         random:      function (min) {
 
             return  Math.random() * 255 + min;
@@ -42,6 +42,9 @@ var Color = (function ($) {
             ].join(', ') + ')';
         }
     });
+
+    return Color;
+
 })(jquery);
 
 
@@ -117,13 +120,15 @@ var CanvasView = (function ($) {
         return this;
     }
 
-    CanvasView.prototype.init = function () {
+    $.Class.extend(CanvasView, null, {
+        init:    function () {
 
-        var $_View = this.$_View.offsetParent();
+            var $_View = this.$_View.offsetParent();
 
-        this.width = this.$_View[0].width = $_View.width();
-        this.height = this.$_View[0].height = $_View.height();
-    };
+            this.width = this.$_View[0].width = $_View.width();
+            this.height = this.$_View[0].height = $_View.height();
+        }
+    });
 
     return CanvasView;
 
@@ -163,7 +168,7 @@ return  (function ($, Color, Star, CanvasView) {
         });
     }
 
-    return  $.inherit(CanvasView, StarMap, null, {
+    CanvasView.extend(StarMap, null, {
         move:       function () {
             var _This_ = this;
 
@@ -226,5 +231,8 @@ return  (function ($, Color, Star, CanvasView) {
             self.requestAnimationFrame( this.animate.bind(this) );
         }
     });
+
+    return StarMap;
+
 })(jquery, Color, Star, CanvasView);
 });

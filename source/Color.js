@@ -15,7 +15,7 @@ define(['jquery'],  function ($) {
         this.style = _Self_.getStyle(this.red, this.green, this.blue);
     }
 
-    return  $.extend(Color, {
+    $.extend(Color, {
         random:      function (min) {
 
             return  Math.random() * 255 + min;
@@ -27,4 +27,7 @@ define(['jquery'],  function ($) {
             ].join(', ') + ')';
         }
     });
+
+    return Color;
+
 });

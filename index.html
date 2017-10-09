@@ -28,21 +28,26 @@
             position:     relative;
         }
     </style>
+<!--[if lte IE 9]>
+    <script src="https://cdn.bootcss.com/html5-history-api/4.2.8/history.min.js"></script>
+<![endif]-->
+    <script src="https://cdn.bootcss.com/MutationObserver.js/0.3.2/mutationobserver.min.js"></script>
 
-    <script src="https://cdn.bootcss.com/require.js/2.3.3/require.min.js"></script>
+    <script src="https://cdn.bootcss.com/require.js/2.3.5/require.min.js"></script>
     <script>
         require.config({
-            paths:    {
-                jquery:       'https://cdn.bootcss.com/jquery/3.2.1/jquery.min',
-                jQueryKit:    'https://tech_query.oschina.io/iquery/jQueryKit',
-                GitHub_RW:    'https://cdn.bootcss.com/github-repo-widget/e23d85ab8f/jquery.githubRepoWidget.min'
-            },
-            shim:     {GitHub_RW:  ['jquery']}
+            paths:      {
+                jquery:        'https://cdn.bootcss.com/jquery/3.2.1/jquery.min',
+                jQueryKit:     'https://git-dev.tk/script/jQueryKit',
+                EasyWebApp:    'https://git-dev.tk/script/EasyWebApp'
+            }
         });
 
-        require(['jquery', 'StarMap', 'GitHub_RW'],  function ($, StarMap) {
+        require(['jquery', 'StarMap', 'EasyWebApp'],  function ($, StarMap) {
 
             $( document ).ready(function () {
+
+                $('#EWA_box').iWebApp();
 
                 (new StarMap('body > canvas')).render();
             });
@@ -50,5 +55,7 @@
     </script>
 </head><body>
     <canvas></canvas>
-    <div class="github-widget" data-repo="TechQuery/StarMap"></div>
+    <div class="github-widget"
+         data-href="demo/Repository.html?repo=TechQuery/StarMap"></div>
+    <div id="EWA_box"></div>
 </body></html>
